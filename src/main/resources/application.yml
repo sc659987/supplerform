@@ -3,12 +3,16 @@ spring:
         name: namyata
     datasource:
         driverClassName: com.mysql.jdbc.Driver
-        url: jdbc:mysql://localhost/test
+        url: jdbc:mysql://localhost/namyata_db
         username: namyata_supplier
         password: iu&*%314gh!%!$#jhg
-        name: namyata_db
     jpa:
         hibernate:
           ddl-auto: update
+          dialect: org.hibernate.dialect.MySQL5Dialect
+
 server:
     port: 9000
+
+hibernate:
+  dialect: org.hibernate.dialect.MySQL5Dialect
