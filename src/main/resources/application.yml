@@ -1,0 +1,14 @@
+spring:
+    application:
+        name: namyata
+    datasource:
+        driverClassName: com.mysql.jdbc.Driver
+        url: jdbc:mysql://localhost/test
+        username: namyata_supplier
+        password: iu&*%314gh!%!$#jhg
+        name: namyata_db
+    jpa:
+        hibernate:
+          ddl-auto: update
+server:
+    port: 9000
