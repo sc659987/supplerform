@@ -2,11 +2,9 @@ package com.namyata.rest;
 
 import com.namyata.data.model.YogaTeacher;
 import com.namyata.repo.YogaTeacherRepository;
+import io.swagger.annotations.*;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestMethod;
-import org.springframework.web.bind.annotation.ResponseBody;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 
@@ -15,12 +13,28 @@ import java.util.List;
 public class NamyataSupplierRestController {
 
     @Autowired
-    private YogaTeacherRepository yogaTeacherRepository;
+    private YogaTeacherRepository repository;
 
+    @ApiOperation(value = "saveYogaTeacher", nickname = "saveYogaTeacher")
     @ResponseBody
     @RequestMapping(method = RequestMethod.GET)
-    List<YogaTeacher> getTeachersInfo() {
-        return null;
+    public List<YogaTeacher> getTeachersInfo() {
+        return this.repository.findAll();
     }
+
+    @ApiOperation(value = "saveYogaTeacher", nickname = "saveYogaTeacher")
+    @RequestMapping(method = RequestMethod.POST)
+    @ApiImplicitParams({
+            @ApiImplicitParam(name = "yogaTeacher",
+                    required = true,
+                    dataType = "string", paramType = "query", defaultValue = "Niklas")
+    })
+    @ApiResponses(value = {
+            @ApiResponse(code = 200, message = "Success", response = Void.class),
+            @ApiResponse(code = 500, message = "Failure")})
+    public void saveYogaTeacher(@RequestBody YogaTeacher yogaTeacher) {
+        this.repository.save(yogaTeacher);
+    }
+
 
 }

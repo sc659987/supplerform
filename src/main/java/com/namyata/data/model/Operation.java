@@ -1,14 +1,9 @@
 package com.namyata.data.model;
 
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
-import javax.persistence.Id;
+import javax.persistence.*;
 import java.util.List;
 
-/**
- * Created by sai on 21-01-2017.
- */
+
 @Entity
 public class Operation {
 
@@ -16,23 +11,34 @@ public class Operation {
     @GeneratedValue(strategy = GenerationType.AUTO)
     private Long id;
 
-    private WorkingHours workingHours;
+    @OneToOne(optional = false, cascade = CascadeType.ALL)
+    private WorkingHour workingHour;
 
-    private double pricePerSlot;
+    private Double pricePerSlot;
 
+    @Enumerated
     private ServicesOffered offeredServices;
 
+    @OneToOne(optional = false, cascade = CascadeType.ALL)
     private Address address;
 
+    @ElementCollection
     private List<String> localitiesCovered;
 
-
-    public WorkingHours getWorkingHours() {
-        return workingHours;
+    public Long getId() {
+        return id;
     }
 
-    public void setWorkingHours(WorkingHours workingHours) {
-        this.workingHours = workingHours;
+    public void setId(Long id) {
+        this.id = id;
+    }
+
+    public WorkingHour getWorkingHour() {
+        return workingHour;
+    }
+
+    public void setWorkingHour(WorkingHour workingHour) {
+        this.workingHour = workingHour;
     }
 
     public double getPricePerSlot() {

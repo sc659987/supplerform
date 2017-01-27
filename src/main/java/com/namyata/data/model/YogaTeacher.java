@@ -1,21 +1,22 @@
 package com.namyata.data.model;
 
-import javafx.util.Pair;
-
 import javax.persistence.*;
 import java.util.List;
 
+@Entity
 public class YogaTeacher {
 
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
-    private long id;
+    private Long id;
 
+    //--basic information----
     private String firstName;
 
     private String lastName;
 
-    private Pair<Double, Double> addressLocation;
+    @OneToOne(optional = false, cascade = CascadeType.ALL)
+    private AddressLatLong addressLocation;
 
     @OneToOne(optional = false, cascade = CascadeType.ALL)
     @JoinColumn(name = "address_id")
@@ -23,39 +24,51 @@ public class YogaTeacher {
 
     private String profilePicUrl;
 
-    @OneToMany(cascade = CascadeType.ALL)
-    private List<String> fbLinks;
+    private String aboutMe;
 
-    @OneToMany(cascade = CascadeType.ALL)
-    private List<String> instagramLinks;
+    @ElementCollection
+    private List<String> knownLanguages;
 
-    @OneToMany(cascade = CascadeType.ALL)
-    private List<String> photosLinks;
+    @ElementCollection
+    private List<String> musicInterests;
 
+    private Double yearsOfProfessionalExperience;
+
+    //----Yoga style-----
     @ElementCollection
     private List<YogaStyle> yogaStyles;
 
-    @OneToMany
-    private List<LearningSource> learningSources;
 
-    private double yearsOfProfessionalExperience;
-
-    @OneToMany(cascade = CascadeType.ALL)
-    private List<String> knownLanguages;
-
-    @OneToMany(cascade = CascadeType.ALL)
-    private List<ServicesOffered> offeredServices;
-
-    private String aboutMe;
-
-    @OneToMany(cascade = CascadeType.ALL)
-    private List<String> musicInterests;
-
+    //--------Operation----
     @OneToMany(cascade = CascadeType.ALL)
     private List<Operation> operations;
 
+
+    // --- LearningSource----
+    @OneToMany
+    private List<LearningSource> learningSources;
+
+
+    //------- not required now
+    @ElementCollection
+    private List<ServicesOffered> offeredServices;
+
+
+    //----- AccountInfo----
     @OneToMany(cascade = CascadeType.ALL)
     private List<AccountInfo> accountInfos;
+
+    //--------- fb image link
+    @ElementCollection
+    private List<String> fbLinks;
+
+    //--- instagram image link
+    @ElementCollection
+    private List<String> instagramLinks;
+
+    //--- upload image
+    @ElementCollection
+    private List<String> photosLinks;
 
 
     public long getId() {
@@ -82,11 +95,11 @@ public class YogaTeacher {
         this.lastName = lastName;
     }
 
-    public Pair<Double, Double> getAddressLocation() {
+    public AddressLatLong getAddressLocation() {
         return addressLocation;
     }
 
-    public void setAddressLocation(Pair<Double, Double> addressLocation) {
+    public void setAddressLocation(AddressLatLong addressLocation) {
         this.addressLocation = addressLocation;
     }
 

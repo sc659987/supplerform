@@ -23,6 +23,13 @@ public class Address {
 
     private String pin;
 
+    public Long getId() {
+        return id;
+    }
+
+    public void setId(Long id) {
+        this.id = id;
+    }
 
     public String getAddress1() {
         return address1;

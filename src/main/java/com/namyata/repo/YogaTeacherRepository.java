@@ -10,10 +10,9 @@ import java.util.List;
  */
 public interface YogaTeacherRepository extends CrudRepository<YogaTeacher, Long> {
 
-    public List<YogaTeacher> findAll();
+    List<YogaTeacher> findAll();
 
-    public YogaTeacher findById(Long id);
+    YogaTeacher findById(Long id);
 
-    public void saveEmployee(YogaTeacher yogaTeacher);
 
 }

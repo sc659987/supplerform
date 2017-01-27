@@ -22,6 +22,14 @@ public class AccountInfo {
 
     private String bank;
 
+    public Long getId() {
+        return id;
+    }
+
+    public void setId(Long id) {
+        this.id = id;
+    }
+
     public String getPayTM() {
         return payTM;
     }
